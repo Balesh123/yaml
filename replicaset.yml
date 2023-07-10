@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: ReplicaSet			# What kind of object we are deploying and it is here ReplicaSet
+metadata:				# Contains metadata information for the ReplicaSet like name and labels.
+  name: nginx-replicaset		# The name of the object which is here nginx-replicaset
+  labels:				# What lable we want to assing this object
+    app: nginx
+spec:					#Specifies the desired state for the ReplicaSet
+  replicas: 3				# Defines the desired number of replicas (in this example, 3).
+  selector:				# Defines the labels used to select the Pods that the ReplicaSet manages.
+    matchLabels:
+      app: nginx
+  template:				# Defines the Pod template used to create new Pods managed by the ReplicaSet.
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx:latest
+          ports:
+            - containerPort: 80

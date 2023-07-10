@@ -1,0 +1,21 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+   name: mydeployments
+   namespace: balesh
+spec:
+   replicas: 1
+   selector:      # tells the controller which pods to watch/belong to
+    matchLabels:
+     name: apache-deploy
+   template:
+     metadata:
+       name: httpd-deploy
+       labels:
+         name: apache-deploy
+     spec:
+      containers:
+        - name: apache
+          image: httpd
+          ports:
+          - containerPort: 80
